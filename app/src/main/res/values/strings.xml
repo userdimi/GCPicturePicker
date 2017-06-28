@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GC Picture Picker</string>
+    <string name="btn_picture_upload">Bild hochladen</string>
 </resources>
