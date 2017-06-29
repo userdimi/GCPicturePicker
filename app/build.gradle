@@ -38,4 +38,7 @@ dependencies {
     //Retrofit
     compile "com.squareup.retrofit2:retrofit:2.3.0"
 
+    //Anko
+    compile "org.jetbrains.anko:anko:$anko_version"
+
 }
