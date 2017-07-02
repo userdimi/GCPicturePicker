@@ -1,7 +1,11 @@
 <resources>
     <string name="app_name">GC Picture Picker</string>
     <string name="btn_picture_upload">Bild hochladen</string>
-    <string name="alert_externalStorage_Permission">Der Zugriff auf deinen Speicher ist
-        Voraussetzung für die Funktion der App. Bitte erteile diesen Zugriff! </string>
-    <string name="btn_pos_alert_externalStorage">Klar!</string>
+    <string name="alert_externalStorage_Permission_message">Um Fotos hochzuladen, benötigt die App
+        den Zugriff auf deinen Gerätespeicher. Ohne diesen Zugriff kannst du keine Bilder hochladen.
+    </string>
+    <string name="alert_externalStorage_Permission_title">Was zur Hölle...?!</string>
+    <string name="btn_pos_alert_externalStorage">Roger!</string>
+    <string name="btn_neg_alert_externalStorage">Ich verzichte!</string>
+
 </resources>

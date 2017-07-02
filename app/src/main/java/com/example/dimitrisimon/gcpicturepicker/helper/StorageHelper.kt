@@ -16,10 +16,4 @@ class StorageHelper {
     fun externalStorageMounted (): Boolean {
         return Environment.MEDIA_MOUNTED.equals(storagePath)
     }
-
-    fun externalStorageReadable (): Boolean {
-        return Environment.MEDIA_MOUNTED_READ_ONLY.equals(storagePath)
-    }
-
-
 }

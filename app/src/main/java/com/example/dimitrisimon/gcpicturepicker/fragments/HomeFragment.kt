@@ -1,15 +1,17 @@
 package com.example.dimitrisimon.gcpicturepicker.fragments
 
-
 import android.app.Fragment
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.dimitrisimon.gcpicturepicker.R
+import com.example.dimitrisimon.gcpicturepicker.fragments.HomeFragment.statics.TAG
+import com.example.dimitrisimon.gcpicturepicker.helper.PermissionHelper
 import com.example.dimitrisimon.gcpicturepicker.helper.StorageHelper
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.jetbrains.anko.alert
 import org.jetbrains.anko.toast
 
 /**
@@ -25,6 +27,7 @@ class HomeFragment : Fragment() {
         //Fragment Tag
         const val TAG = "Homefragment"
     }
+
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -49,9 +52,30 @@ class HomeFragment : Fragment() {
 
     fun selectPictures(StorageHelper: StorageHelper) {
 
+        Log.i(TAG, "Show upload button pressed. Checking permission.")
+
         //first check if the storage is mounted
-        if (StorageHelper.externalStorageMounted())
-            toast("Storage ist gemounted")
+        if (!StorageHelper.externalStorageMounted()) {
+            return
+        }
+        //than check the VersionNumber of the Device
+        //if the VersionNumber is higher then 23 we need to request the permissions on runtime
+        if (Build.VERSION.SDK_INT > 23) {
+
+            // now check if the read external storage permission is already available.
+            if (PermissionHelper().permissionToReadStorageNotGranded(activity)) {
+
+                // if not, request permissions and open gallery
+                PermissionHelper().requestReadExternStoragePermission(activity)
+
+            } else {
+                //permissions, available, open gallery
+                openGallery()
+            }
+        }
     }
 
+    private fun openGallery() {
+        toast("Open Gallery")
+    }
 }
