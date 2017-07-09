@@ -7,5 +7,8 @@
     <string name="alert_externalStorage_Permission_title">Was zur Hölle...?!</string>
     <string name="btn_pos_alert_externalStorage">Roger!</string>
     <string name="btn_neg_alert_externalStorage">Ich verzichte!</string>
+    <string name="alert_uploadDisabled_message">Ohne einen Zugriff auf den Gerätespeicher, ist ein
+        Upload der Bilder nicht möglich. Möchtest du den Zugriff auf deinen Gerätespeicher zulassen?</string>
+    <string name="alert_uploadDisabled_title">Upload der Bilder nicht möglich!</string>
 
 </resources>
