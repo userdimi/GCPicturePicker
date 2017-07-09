@@ -1,11 +1,14 @@
 package com.example.dimitrisimon.gcpicturepicker.api
 
 import com.example.dimitrisimon.gcpicturepicker.model.GetPictures
+import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.http.POST
-import com.example.dimitrisimon.gcpicturepicker.model.PostPictures
 import retrofit2.Call
-import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Multipart
+import retrofit2.http.Part
+
 
 
 /**
@@ -14,10 +17,14 @@ import retrofit2.http.GET
 
 interface PicturePickerAPI {
 
-  //Post pictures
- @POST("/pictures")
-    fun addPics(@Body postPicture: PostPictures) : Call<PostPictures>
+    @Multipart
+    @POST("upload")
+    fun upload(
+            @Part picture: MultipartBody.Part
+    ): Call<ResponseBody>
 
- @GET("/pictures")
-    fun getPics() : Call<GetPictures>
+
+    @GET("/pictures")
+    fun getPics(): Call<GetPictures>
 }
+

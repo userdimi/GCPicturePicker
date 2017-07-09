@@ -1,5 +1,6 @@
 package com.example.dimitrisimon.gcpicturepicker.fragments
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -12,7 +13,7 @@ import com.example.dimitrisimon.gcpicturepicker.fragments.HomeFragment.statics.T
 import com.example.dimitrisimon.gcpicturepicker.helper.PermissionHelper
 import com.example.dimitrisimon.gcpicturepicker.helper.StorageHelper
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.jetbrains.anko.support.v4.toast
+
 
 /**
  * (c) Dimitri Simon on 24.06.17
@@ -28,6 +29,8 @@ class HomeFragment : android.support.v4.app.Fragment() {
         const val TAG = "Homefragment"
     }
 
+    val SELECT_PICTURE_REQUEST: Int = 1;
+
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
@@ -41,12 +44,12 @@ class HomeFragment : android.support.v4.app.Fragment() {
      */
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
 
-        btn_picture_upload.setOnClickListener { uploadPicture() }
+        btn_picture_upload.setOnClickListener { PrepareUploadPictures() }
 
         super.onViewCreated(view, savedInstanceState)
     }
 
-    fun uploadPicture() {
+    fun PrepareUploadPictures() {
         selectPictures(StorageHelper())
     }
 
@@ -75,6 +78,9 @@ class HomeFragment : android.support.v4.app.Fragment() {
         }
     }
 
+    /**
+     * If Permissions are granted, open the the gallery. Otherwise go back to the Homescreen
+     */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             PermissionHelper.statics.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE
@@ -87,8 +93,35 @@ class HomeFragment : android.support.v4.app.Fragment() {
         }
     }
 
+    /**
+     * Open Android Gallery App to choose a picture for upload
+     */
     fun openGallery() {
-        toast("Open Gallery")
+        var intent: Intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, SELECT_PICTURE_REQUEST)
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+
+    }
+
+    /**
+    fun uploadPictures (fileUri: Uri) {
+
+        var pictureFile: RequestBody = RequestBody.create(
+            MediaType.parse(context.contentResolver.getType(fileUri)), FileUtils.getFile(this, fileUri))
+
+        //create Retrofit instance
+        RetrofitHelper().buildRetrofit()
+
+    }
+    */
+
+
 }
+
+
